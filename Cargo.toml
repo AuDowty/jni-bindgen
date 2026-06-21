@@ -1,0 +1,18 @@
+[package]
+name = "jni-bindgen"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Generate Rust JNI wrappers from Java .class files."
+repository = "https://github.com/AuDowty/jni-bindgen"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+cafebabe = "0.8"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
