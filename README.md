@@ -1,6 +1,6 @@
 # jni-bindgen
 
-Generate Rust [`jni`](https://crates.io/crates/jni)-crate wrappers from compiled Java `.class` files. Reverse of `cbindgen`.
+Generate Rust [`jni`](https://crates.io/crates/jni)-crate wrappers from compiled Java `.class` files.
 
 ## Install
 
@@ -16,7 +16,7 @@ jni-bindgen Foo.class -o foo.rs        # write to file
 jni-bindgen Foo.class --name MyFoo     # override struct name
 ```
 
-Given a `Hello.class` compiled from:
+Given a class like:
 
 ```java
 public class Hello {
@@ -27,12 +27,10 @@ public class Hello {
 }
 ```
 
-`jni-bindgen Hello.class` emits a `Hello<'local>` struct with `new()`, `greet()`, `add()`, and `version()` methods that route through `JNIEnv::call_method` / `call_static_method` with the correct descriptors baked in.
+`jni-bindgen Hello.class` emits a `Hello<'local>` struct with `new()`, `greet()`, `add()`, and `version()` that call through `JNIEnv` with the correct descriptors baked in.
 
-## Status
-
-v0.1 handles: constructors, instance methods, static methods. Primitives + `String` + opaque object types are wrapped; arrays and inner classes are passed through as `JObject`.
+Handles constructors, instance methods, static methods. Primitives, `String`, and opaque object types are wrapped; arrays and inner classes pass through as `JObject`.
 
 ## License
 
-MIT.
+MIT
